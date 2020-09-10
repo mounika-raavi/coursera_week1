@@ -1,0 +1,10 @@
+  
+household_power_consumption <- read.csv("~/R- Course/exdata_data_household_power_consumption/household_power_consumption.txt", sep=";")
+   View(household_power_consumption)
+   library(dplyr)
+    data<-tbl_df(household_power_consumption)
+    Dataset<-filter(data,Date=="1/2/2007" | Date=="2/2/2007")
+    p<-with(Dataset,hist(as.numeric(Global_active_power),col = "red",xlab ="Global Active Power(kilowatts)" ,main="Global Active Power"))
+    with(Dataset,hist(as.numeric(Global_active_power),col = "red",xlab ="Global Active Power(kilowatts)" ,main="Global Active Power"))
+    png("plot1.png", width=480, height=480)
+    dev.off()
