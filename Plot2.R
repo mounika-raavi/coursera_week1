@@ -1,0 +1,13 @@
+household_power_consumption <- read.csv("~/R- Course/exdata_data_household_power_consumption/household_power_consumption.txt", sep=";")
+ View(household_power_consumption)
+ library(dplyr)
+ data<-tbl_df(household_power_consumption)
+ Dataset<-filter(data,Date=="1/2/2007" | Date=="2/2/2007")
+Dataset$Date <- as.Date(Dataset$Date, format="%d/%m/%Y")
+ Dataset$Time <- strptime(Dataset$Time, format="%H:%M:%S")
+ Dataset$Time[1:1440]<- format(Dataset$Time[1:1440],"2007-02-01 %H:%M:%S")
+ Dataset$Time[1441:2880] <- format(Dataset$Time[1441:2880],"2007-02-02 %H:%M:%S")
+ 
+with(Dataset,plot(Time,Global_active_power,type = "l",xlab = "",ylab = "Global Active Power(kilowatts)"))
+dev.copy(png, file="plot2.png", height=480, width=480)
+dev.off()
